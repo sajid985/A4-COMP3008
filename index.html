@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ottawa Footy Sevens</title>
+  <!-- Bootstrap 5.3.3, included in the project so the page works without a CDN -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body class="d-flex flex-column min-vh-100 bg-light">
+  <a href="#main" class="skip-link visually-hidden-focusable">Skip to main content</a>
+
+  <nav class="navbar site-nav" aria-label="Main">
+    <div class="container">
+      <a class="navbar-brand" href="#/home">Ottawa Footy Sevens</a>
+      <div class="d-flex align-items-center gap-4">
+        <a class="nav-link" href="#/home" data-nav="home">Home</a>
+        <a class="nav-link" href="#/leagues" data-nav="leagues">League Selection</a>
+        <span id="registration-count" class="small text-muted" hidden></span>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main" class="container py-4 flex-grow-1">
+    <div id="app"><p class="text-muted py-5" id="loading-message">Loading leagues...</p></div>
+  </main>
+
+  <script>
+    // If something fails while the page is starting, show the problem
+    // instead of leaving "Loading leagues..." on screen
+    function showStartupError(message) {
+      var loading = document.getElementById("loading-message");
+      if (loading) {
+        loading.className = "alert alert-danger";
+        loading.textContent = "The page couldn't start (" + message + "). Try refreshing the page.";
+      }
+    }
+    window.addEventListener("error", function (e) {
+      showStartupError(e.message);
+    });
+    window.addEventListener("unhandledrejection", function (e) {
+      showStartupError(e.reason && e.reason.message ? e.reason.message : String(e.reason));
+    });
+  </script>
+
+  <!-- Screen readers read out messages put here (match counts, sending status) -->
+  <div id="announcer" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <footer class="border-top bg-white py-3 small text-muted">
+    <div class="container">
+      <p>COMP 3008 project by Team 01: a redesign of the Ottawa Footy Sevens league finder, not the official website. League data is sample data, and registrations are simulated and saved only in this browser.</p>
+      <details>
+        <summary class="fw-semibold text-body">Demo controls for testing</summary>
+        <div class="d-flex flex-wrap align-items-center gap-3 pt-2">
+          <div class="form-check mb-0">
+            <input class="form-check-input" type="checkbox" id="simulate-failure">
+            <label class="form-check-label" for="simulate-failure">Make the next registration fail with a connection error</label>
+          </div>
+          <button type="button" id="reset-demo" class="btn btn-outline-secondary btn-sm">Reset demo data</button>
+        </div>
+      </details>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/logic.js"></script>
+  <script src="js/service.js"></script>
+  <script src="js/views.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- Inter font, as in our A3 prototype. Loaded last so the page never waits for it:
+       the system font is used until it arrives, or if there is no internet. -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+</body>
+</html>
