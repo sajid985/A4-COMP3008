@@ -6,7 +6,7 @@ This is the working version of our Assignment 3 redesign (Design A). You can bro
 
 ## Running it
 
-Online version: <ADD GITHUB PAGES LINK HERE>
+Online version: https://sajid985.github.io/A4-COMP3008/
 
 To run it from the zip, unzip `Team01_A4_Source.zip` and double-click `index.html` inside the `Team01_A4_Source` folder. It opens in your browser. There's nothing to install and no login.
 
