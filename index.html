@@ -56,11 +56,12 @@
         <summary class="fw-semibold text-body">Demo controls for testing</summary>
         <div class="d-flex flex-wrap align-items-center gap-3 pt-2">
           <div class="form-check mb-0">
-            <input class="form-check-input" type="checkbox" id="simulate-failure">
+            <input class="form-check-input" type="checkbox" id="simulate-failure" aria-describedby="simulate-note">
             <label class="form-check-label" for="simulate-failure">Make the next registration fail with a connection error</label>
           </div>
           <button type="button" id="reset-demo" class="btn btn-outline-secondary btn-sm">Reset demo data</button>
         </div>
+        <p id="simulate-note" class="mb-0 mt-2 text-body" hidden>On. Now register for any league: when you click Confirm Registration, it will fail with a connection error and a Try again button. It turns itself off after that.</p>
       </details>
     </div>
   </footer>

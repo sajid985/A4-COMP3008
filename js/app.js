@@ -4,6 +4,7 @@
 const app = document.getElementById("app");
 const announcer = document.getElementById("announcer");
 const failToggle = document.getElementById("simulate-failure");
+const failNote = document.getElementById("simulate-note");
 
 const state = {
   loading: true,
@@ -201,7 +202,7 @@ async function submitRegistration(form) {
     });
     location.hash = `#/confirmation/${registration.id}`;
   } catch (err) {
-    failToggle.checked = failNextRequest;
+    showFailToggle(); // the simulated failure has been used up, so untick the box
     const leagues = err.code === "full" ? await getLeagues() : state.leagues;
     setState({ leagues, form: { ...state.form, sending: false, error: { code: err.code, message: err.message } } });
     if (document.getElementById("submit-error")) {
@@ -272,15 +273,22 @@ document.querySelector(".skip-link").addEventListener("click", (e) => {
   focusOn("page-title");
 });
 
+// Demo control: the box and its note always show whether the next registration will fail
+function showFailToggle() {
+  failToggle.checked = failNextRequest;
+  failNote.hidden = !failNextRequest;
+}
+
 failToggle.addEventListener("change", () => {
   failNextRequest = failToggle.checked;
+  showFailToggle();
 });
 
 document.getElementById("reset-demo").addEventListener("click", async () => {
   if (!confirm("Reset all demo registrations and spot counts?")) return;
   resetData();
   failNextRequest = false;
-  failToggle.checked = false;
+  showFailToggle();
   state.filters = { ...NO_FILTERS };
   state.form = newForm();
   // Switch to League Selection first, so the old page isn't redrawn without its data
