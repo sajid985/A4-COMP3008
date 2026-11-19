@@ -100,8 +100,11 @@ summary:focus-visible {
   font-weight: 600;
 }
 
-/* Darker outline so radio buttons and checkboxes stand out from the background */
-.form-check-input {
+/* Darker outlines so form controls stand out from the background
+   (WCAG 1.4.11 asks for 3:1 contrast on the edges of controls) */
+.form-check-input,
+.form-control,
+.form-select {
   border-color: #6c757d;
 }
 

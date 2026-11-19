@@ -87,7 +87,12 @@ async function registerPlayer(leagueId, kind, player) {
     spot: player.spot,
   };
   saved.registrations.push(registration);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+  } catch (err) {
+    // Browser storage is full or blocked: nothing was saved, so nothing changes
+    throw serviceError("storage", "Your registration couldn't be saved in this browser, so nothing was changed.");
+  }
   return registration;
 }
 
